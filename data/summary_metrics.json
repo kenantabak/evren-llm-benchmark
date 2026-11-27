@@ -1,0 +1,599 @@
+{
+  "benchmark_name": "EVREN LLM API Comprehensive Benchmark",
+  "version": "1.0.0",
+  "platform_url": "https://evren.ssyz.org.tr/llm-inference",
+  "api_base_url": "https://evren-llmapi.ssyz.org.tr/v1",
+  "evaluation_window": "November 2026 (EVREN LLM API Test and Integration Phase)",
+  "totals": {
+    "logical_tasks": 1727,
+    "http_retries": 543,
+    "total_live_http_calls": 2270,
+    "models_evaluated": 7,
+    "includes_auto_router": true,
+    "evren_fleet_total_options": 15
+  },
+  "fixed_parameters": {
+    "temperature": 0.0,
+    "execution_mode": "sequential_single_stream",
+    "streaming": "SSE (stream=true, include_usage=true) for long outputs",
+    "daily_suite_max_tokens": 4096,
+    "hard_suite_max_tokens": "hybrid 8192 (hard_30 initial) / 16384 (retries + ultra_hard_20)",
+    "hard_suite_wall_cap_s": 420,
+    "effort_suite_max_tokens": 16384,
+    "effort_suite_wall_cap_s": 420,
+    "latency_percentile_method": "statistics.median(all_calls_including_timeouts)"
+  },
+  "model_card_metadata": {
+    "gemma-4-31b": {
+      "architecture": "dense",
+      "reported_params": "31.3B",
+      "context_window": "256K"
+    },
+    "deepseek-v4.1-flash": {
+      "architecture": "MoE+Engram",
+      "reported_params": "763B (552B backbone + 196B Engram, ~16B active)",
+      "context_window": "1M"
+    },
+    "glm-5.3": {
+      "architecture": "MoE",
+      "reported_params": "753B (~40B active)",
+      "context_window": "512K"
+    },
+    "qwen3.8-flash-next": {
+      "architecture": "hybrid_thinking",
+      "reported_params": "EVREN hosted",
+      "context_window": "256K"
+    },
+    "qwen3-vl-30b": {
+      "architecture": "vision_language",
+      "reported_params": "30B",
+      "supports_video_s": 16
+    },
+    "deepseek-ocr-2": {
+      "architecture": "dedicated_ocr",
+      "endpoint": "POST /v1/ocr"
+    },
+    "dots-ocr": {
+      "architecture": "dedicated_ocr",
+      "endpoint": "POST /v1/ocr"
+    },
+    "auto": {
+      "architecture": "dynamic_router",
+      "advertised_context": 32768,
+      "observed_routed_context": "238K-309K"
+    }
+  },
+  "reasoning_effort_aliases": {
+    "qwen3.8-flash-next": {
+      "high": "xhigh"
+    },
+    "glm-5.3": {
+      "medium": "high",
+      "minimal": "low"
+    },
+    "deepseek-v4.1-flash": {
+      "medium": "high",
+      "minimal": "low"
+    }
+  },
+  "leaderboard_9_configs": [
+    {
+      "model": "gemma-4-31b",
+      "mode": "reasoning_on",
+      "daily_80": {
+        "passed": 79,
+        "total": 80,
+        "pct": 98.8,
+        "p50_s": 34.7
+      },
+      "hard_50": {
+        "passed": 45,
+        "total": 50,
+        "pct": 90.0,
+        "p50_s": 108.6,
+        "finished_total": 50,
+        "accuracy_when_finished_pct": 90.0,
+        "outcomes": {
+          "passed": 45,
+          "wrong_answer": 5,
+          "wall_cap_timeout": 0,
+          "length_cap": 0,
+          "server_503": 0
+        },
+        "strict_420s_note": "1 hard logic task solved at 589.6s in prior 600s phase; strict 420s cut = 44/50 (88.0%)."
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "mode": "reasoning_on",
+      "daily_80": {
+        "passed": 78,
+        "total": 80,
+        "pct": 97.5,
+        "p50_s": 20.2
+      },
+      "hard_50": {
+        "passed": 41,
+        "total": 50,
+        "pct": 82.0,
+        "p50_s": 121.9,
+        "finished_total": 41,
+        "accuracy_when_finished_pct": 100.0,
+        "outcomes": {
+          "passed": 41,
+          "wrong_answer": 0,
+          "wall_cap_timeout": 8,
+          "length_cap": 1,
+          "server_503": 0
+        }
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "mode": "reasoning_off",
+      "daily_80": {
+        "passed": 77,
+        "total": 80,
+        "pct": 96.3,
+        "p50_s": 15.6
+      },
+      "hard_50": {
+        "passed": 41,
+        "total": 50,
+        "pct": 82.0,
+        "p50_s": 35.5,
+        "finished_total": 48,
+        "accuracy_when_finished_pct": 85.4
+      }
+    },
+    {
+      "model": "qwen3.8-flash-next",
+      "mode": "reasoning_off",
+      "daily_80": {
+        "passed": 75,
+        "total": 80,
+        "pct": 93.8,
+        "p50_s": 20.5
+      },
+      "hard_50": {
+        "passed": 38,
+        "total": 50,
+        "pct": 76.0,
+        "p50_s": 77.8,
+        "finished_total": 50,
+        "accuracy_when_finished_pct": 76.0
+      }
+    },
+    {
+      "model": "gemma-4-31b",
+      "mode": "reasoning_off",
+      "daily_80": {
+        "passed": 79,
+        "total": 80,
+        "pct": 98.8,
+        "p50_s": 17.9
+      },
+      "hard_50": {
+        "passed": 36,
+        "total": 50,
+        "pct": 72.0,
+        "p50_s": 32.1,
+        "finished_total": 50,
+        "accuracy_when_finished_pct": 72.0
+      }
+    },
+    {
+      "model": "glm-5.3",
+      "mode": "reasoning_on",
+      "daily_80": {
+        "passed": 59,
+        "total": 80,
+        "pct": 73.8,
+        "p50_s": 50.9
+      },
+      "hard_50": {
+        "passed": 30,
+        "total": 50,
+        "pct": 60.0,
+        "p50_s": 219.9,
+        "finished_total": 30,
+        "accuracy_when_finished_pct": 100.0,
+        "outcomes": {
+          "passed": 30,
+          "wrong_answer": 0,
+          "wall_cap_timeout": 19,
+          "length_cap": 0,
+          "server_503": 1
+        }
+      }
+    },
+    {
+      "model": "qwen3.8-flash-next",
+      "mode": "reasoning_on",
+      "daily_80": {
+        "passed": 70,
+        "total": 80,
+        "pct": 87.5,
+        "p50_s": 25.7
+      },
+      "hard_50": {
+        "passed": 29,
+        "total": 50,
+        "pct": 58.0,
+        "p50_s": 228.6,
+        "finished_total": 29,
+        "accuracy_when_finished_pct": 100.0,
+        "outcomes": {
+          "passed": 29,
+          "wrong_answer": 0,
+          "wall_cap_timeout": 17,
+          "length_cap": 4,
+          "server_503": 0
+        }
+      }
+    },
+    {
+      "model": "auto",
+      "mode": "reasoning_off",
+      "daily_80": {
+        "passed": 79,
+        "total": 80,
+        "pct": 98.8,
+        "p50_s": 19.0
+      },
+      "hard_50": {
+        "passed": 29,
+        "total": 50,
+        "pct": 58.0,
+        "p50_s": 71.4,
+        "finished_total": 47,
+        "accuracy_when_finished_pct": 61.7,
+        "routed_to_qwen3_vl_30b": {
+          "count": 31,
+          "total": 50,
+          "pct": 62.0
+        }
+      }
+    },
+    {
+      "model": "glm-5.3",
+      "mode": "reasoning_off",
+      "daily_80": {
+        "passed": 73,
+        "total": 80,
+        "pct": 91.3,
+        "p50_s": 20.8
+      },
+      "hard_50": {
+        "passed": 20,
+        "total": 50,
+        "pct": 40.0,
+        "p50_s": 53.5,
+        "finished_total": 45,
+        "accuracy_when_finished_pct": 44.4
+      }
+    }
+  ],
+  "vision_15": [
+    {
+      "model": "deepseek-v4.1-flash",
+      "mode": "reasoning_on",
+      "passed": 15,
+      "total": 15,
+      "pct": 100.0,
+      "p50_s": 18.31
+    },
+    {
+      "model": "qwen3.8-flash-next",
+      "mode": "reasoning_on",
+      "passed": 15,
+      "total": 15,
+      "pct": 100.0,
+      "p50_s": 16.26
+    },
+    {
+      "model": "gemma-4-31b",
+      "mode": "reasoning_on",
+      "passed": 15,
+      "total": 15,
+      "pct": 100.0,
+      "p50_s": 19.4
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "mode": "reasoning_off",
+      "passed": 14,
+      "total": 15,
+      "pct": 93.3,
+      "p50_s": 9.69
+    },
+    {
+      "model": "qwen3.8-flash-next",
+      "mode": "reasoning_off",
+      "passed": 13,
+      "total": 15,
+      "pct": 86.7,
+      "p50_s": 2.69
+    },
+    {
+      "model": "gemma-4-31b",
+      "mode": "reasoning_off",
+      "passed": 12,
+      "total": 15,
+      "pct": 80.0,
+      "p50_s": 5.63
+    },
+    {
+      "model": "qwen3-vl-30b",
+      "mode": "reasoning_off",
+      "passed": 10,
+      "total": 15,
+      "pct": 66.7,
+      "p50_s": 4.53,
+      "avg_tps": 21.3
+    }
+  ],
+  "ocr_dedicated_5": [
+    {
+      "model": "deepseek-ocr-2",
+      "pure_extraction_passed": 5,
+      "pure_extraction_total": 5,
+      "auto_eval_incl_arithmetic": 4,
+      "p50_s": 2.05,
+      "format": "Markdown",
+      "notes": "Clean Turkish characters (KAFE BOĞAZİÇİ — FİŞ) and units (mIU/L)."
+    },
+    {
+      "model": "dots-ocr",
+      "pure_extraction_passed": 5,
+      "pure_extraction_total": 5,
+      "auto_eval_incl_arithmetic": 4,
+      "p50_s": 5.31,
+      "format": "HTML table",
+      "notes": "Rich HTML <table> output; minor Turkish diacritics drift on rotated receipt and mIU/L -> mlU/L."
+    }
+  ],
+  "tools_and_strict_json_5": {
+    "pure_tool_calling_4_of_4_pct": 100.0,
+    "by_config": [
+      {
+        "model": "gemma-4-31b",
+        "mode": "reasoning_on",
+        "passed": 5,
+        "total": 5,
+        "pct": 100.0
+      },
+      {
+        "model": "gemma-4-31b",
+        "mode": "reasoning_off",
+        "passed": 5,
+        "total": 5,
+        "pct": 100.0
+      },
+      {
+        "model": "deepseek-v4.1-flash",
+        "mode": "reasoning_on",
+        "passed": 5,
+        "total": 5,
+        "pct": 100.0
+      },
+      {
+        "model": "glm-5.3",
+        "mode": "reasoning_on",
+        "passed": 5,
+        "total": 5,
+        "pct": 100.0
+      },
+      {
+        "model": "qwen3.8-flash-next",
+        "mode": "reasoning_on",
+        "passed": 5,
+        "total": 5,
+        "pct": 100.0
+      },
+      {
+        "model": "deepseek-v4.1-flash",
+        "mode": "reasoning_off",
+        "passed": 4,
+        "total": 5,
+        "pct": 80.0
+      },
+      {
+        "model": "glm-5.3",
+        "mode": "reasoning_off",
+        "passed": 4,
+        "total": 5,
+        "pct": 80.0
+      },
+      {
+        "model": "qwen3.8-flash-next",
+        "mode": "reasoning_off",
+        "passed": 4,
+        "total": 5,
+        "pct": 80.0
+      },
+      {
+        "model": "auto",
+        "mode": "reasoning_off",
+        "passed": 4,
+        "total": 5,
+        "pct": 80.0
+      }
+    ]
+  },
+  "long_context_turkish_needle": {
+    "band_51k_to_287k_all_models_pct": 100.0,
+    "prefix_cache_observations": [
+      {
+        "model": "glm-5.3",
+        "mode": "reasoning_on",
+        "prompt_tokens": 245639,
+        "cached_tokens": 244736,
+        "cache_hit_pct": 99.6,
+        "latency_s": 10.5
+      },
+      {
+        "model": "glm-5.3",
+        "mode": "reasoning_off",
+        "prompt_tokens": 245639,
+        "cached_tokens": 0,
+        "cache_hit_pct": 0.0,
+        "latency_s": 70.8
+      },
+      {
+        "model": "qwen3.8-flash-next",
+        "mode": "reasoning_off",
+        "prompt_tokens": 220069,
+        "cached_tokens": 0,
+        "cache_hit_pct": 0.0,
+        "latency_s": 18.6
+      }
+    ],
+    "ultra_long_verified_cold": [
+      {
+        "model": "deepseek-v4.1-flash",
+        "mode": "reasoning_off",
+        "prompt_tokens": 448893,
+        "needles": "3/3",
+        "latency_s": 69.2,
+        "cached_tokens": 0
+      },
+      {
+        "model": "deepseek-v4.1-flash",
+        "mode": "reasoning_on",
+        "prompt_tokens": 448919,
+        "needles": "3/3",
+        "latency_s": 184.7,
+        "cached_tokens": 0
+      },
+      {
+        "model": "glm-5.3",
+        "mode": "reasoning_off",
+        "prompt_tokens": 383467,
+        "needles": "3/3",
+        "latency_s": 103.7,
+        "cached_tokens": 0
+      },
+      {
+        "model": "glm-5.3",
+        "mode": "reasoning_on",
+        "prompt_tokens": 383466,
+        "needles": "3/3",
+        "latency_s": 134.4,
+        "cached_tokens": 0,
+        "note": "Post-TPM-429 cooldown retry"
+      },
+      {
+        "model": "deepseek-v4.1-flash",
+        "mode": "reasoning_on",
+        "prompt_tokens": 785444,
+        "needles": "3/3",
+        "latency_s": 174.0
+      },
+      {
+        "model": "deepseek-v4.1-flash",
+        "mode": "reasoning_off",
+        "prompt_tokens": 785418,
+        "needles": "3/3",
+        "latency_s": 169.2,
+        "cached_tokens": 0
+      }
+    ]
+  },
+  "reasoning_effort_clean_5_systems_coding": {
+    "wall_cap_s": 420,
+    "max_tokens": 16384,
+    "tasks": [
+      "UC01_mvcc_snapshot_kv",
+      "UC02_sql_mini_engine",
+      "UC03_interval_multiset",
+      "UC04_exact_frac_linear",
+      "UC05_dfa_equiv_minimize"
+    ],
+    "results": [
+      {
+        "model": "qwen3.8-flash-next",
+        "effort": "default (high->xhigh)",
+        "passed": 0,
+        "total": 5,
+        "pct": 0.0,
+        "timeouts": 5,
+        "p50_s": 420.0
+      },
+      {
+        "model": "qwen3.8-flash-next",
+        "effort": "low",
+        "passed": 4,
+        "total": 5,
+        "pct": 80.0,
+        "timeouts": 0,
+        "p50_s": 249.9,
+        "range_s": [
+          163.6,
+          346.2
+        ]
+      },
+      {
+        "model": "qwen3.8-flash-next",
+        "effort": "medium",
+        "passed": 5,
+        "total": 5,
+        "pct": 100.0,
+        "timeouts": 0,
+        "p50_s": 179.5,
+        "range_s": [
+          157.8,
+          334.9
+        ]
+      },
+      {
+        "model": "glm-5.3",
+        "effort": "default",
+        "passed": 0,
+        "total": 5,
+        "pct": 0.0,
+        "timeouts": 5,
+        "p50_s": 420.0
+      },
+      {
+        "model": "glm-5.3",
+        "effort": "low",
+        "passed": 3,
+        "total": 5,
+        "pct": 60.0,
+        "timeouts": 1,
+        "p50_s": 108.8,
+        "range_s": [
+          44.7,
+          420.3
+        ]
+      },
+      {
+        "model": "glm-5.3",
+        "effort": "medium (API high)",
+        "passed": 4,
+        "total": 5,
+        "pct": 80.0,
+        "timeouts": 1,
+        "p50_s": 123.2,
+        "range_s": [
+          42.9,
+          420.0
+        ]
+      }
+    ],
+    "deepseek_64k_native_cap_check": {
+      "max_tokens": 65536,
+      "wall_cap_s": 480,
+      "passed": 1,
+      "total": 3,
+      "timeouts": 2,
+      "passed_latency_s": 343.5
+    }
+  },
+  "hallucination_and_multiturn_4": {
+    "fabricated_numbers_count": 0,
+    "multiturn_context_tracking_all_models_pct": 100.0,
+    "glm_5_3_typo_note": "glm-5.3 refused cleanly but spelled METINTE_YOK instead of METINDE_YOK (auto-eval 3/4)."
+  }
+}
