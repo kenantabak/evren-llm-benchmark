@@ -144,13 +144,13 @@ print(ocr_res["latency_s"], ocr_res["text"][:120])
 
 ## İlgili Platformlar ve Tam Çalışma Bağlantıları
 
-Bu açık kaynak kod deposu, EVREN LLM Kıyaslama çalışmasının parçasıdır (diğer platform yayınları tamamlandıkça canlı bağlantılar buraya eklenir):
+Bu açık kaynak kod deposu, 4 platforma yayılan **EVREN LLM Kıyaslama** çalışmasının tekrarlanabilir kod ve doğrulama katmanıdır:
 
-- **GitHub Kod & Metodoloji Deposu:** https://github.com/kenantabak/evren-llm-benchmark
-- **Hugging Face Ham Veri Seti (`1.727` görev / `2.270` çağrı):** *(Yayınlanıyor — canlı link Faz 2'de eklenecek)*
-- **Dev.to Teknik Derinlemesine Makale (Seri 3 / Yazı #12):** *(Yayınlanıyor — canlı link Faz 2'de eklenecek)*
-- **EVREN Forum — Kıyaslama Bulguları (`benchmarks`):** *(Yayınlanıyor — canlı link Faz 2'de eklenecek)*
-- **EVREN Forum — Pratik Kullanım Rehberi (`guides`):** *(Yayınlanıyor — canlı link Faz 2'de eklenecek)*
+- **EVREN Forum — Kıyaslama Bulguları (`benchmarks`):** [31B'lik Model, 763B'lik Devleri Nasıl Geçti? (1.727 Görev / 2.270 Çağrı)](https://evren.ssyz.org.tr/forum/t/01a21c3d-5a01-7bf3-aacd-37b8cb1a3ebb)
+- **EVREN Forum — Pratik Kullanım Rehberi (`guides`):** [EVREN LLM Karar Haritası ve 5 Altın İş Akışı Rehberi](https://evren.ssyz.org.tr/forum/t/01a21c3d-5ae5-7be2-8a4f-330b7ec887d9)
+- **Hugging Face Ham Veri Seti (Parquet, `CC-BY-4.0`):** [kenantabak/evren-llm-benchmark-results](https://huggingface.co/datasets/kenantabak/evren-llm-benchmark-results) · [EVREN Flagship Spaces & Benchmarks Koleksiyonu](https://huggingface.co/collections/kenantabak/evren-flagship-spaces-and-benchmarks-6b056b2e42321ae4eaf72a70)
+- **Dev.to Teknik Derinlemesine Makale (Seri 3 / Bölüm #12):** [31B vs 763B LLM Kıyaslaması: 1.727 Görevde finish_reason Telemetrisi & Gizli reasoning_effort](https://dev.to/kenantabak/31b-vs-763b-llm-kiyaslamasi-1727-gorevde-finishreason-telemetrisi-gizli-reasoningeffort-2g5a)
+- **GitHub Kod & Metodoloji Deposu (MIT):** [kenantabak/evren-llm-benchmark](https://github.com/kenantabak/evren-llm-benchmark)
 
 ---
 
